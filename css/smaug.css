@@ -1,0 +1,22 @@
+body { 
+  font-family: Courier New; 
+}
+
+.fsm__transition-table, .fsm__transition-table th, .fsm__transition-table td {
+        border: 1px solid black;
+}
+.fsm__transition-table th{
+        background: #999;
+}
+.log__text_warning{
+	color:red;
+}
+.log__table, .log__table td, .log__table th{
+     border: 1px solid black;
+    border-collapse:collapse;
+     padding: 10px;
+}
+
+.log_table td, .log_table th {
+    
+}

@@ -1,0 +1,4 @@
+abbbbb, 0010000
+aababa, 0001010
+babbba, 0001000
+abbbbb, 0010000

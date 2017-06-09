@@ -1,0 +1,39 @@
+<html>
+<body><font face="courier new">
+<table class=".fsm__transition-table"><tr><th>From state</th><th>To state</th><th>Input</th><th>Output</th></tr><tr><td>0/0</td><td>1/0</td><td>a</td><td>-</td></tr><tr><td>0/0</td><td>0/0</td><td>b</td><td>-</td></tr><tr><td>1/0</td><td>1/0</td><td>a</td><td>-</td></tr><tr><td>1/0</td><td>2/1</td><td>b</td><td>-</td></tr><tr><td>2/1</td><td>1/0</td><td>a</td><td>-</td></tr><tr><td>2/1</td><td>0/0</td><td>b</td><td>-</td></tr></table>
+</font>
+<table border="1">
+<caption>Checking data...</caption>
+<tr bgcolor="#999999">
+<th>Input</th>
+<th>Expected output</th>
+<th>Produced output</th>
+<th>String distance</th>
+</tr>
+<tr>
+<td>abbbbb</td>
+<td>0010000</td>
+<td>0010000</td>
+<td>0</td>
+</tr>
+<tr>
+<td>aababa</td>
+<td>0001010</td>
+<td>0001010</td>
+<td>0</td>
+</tr>
+<tr>
+<td>babbba</td>
+<td>0001000</td>
+<td>0001000</td>
+<td>0</td>
+</tr>
+<tr>
+<td>abbbbb</td>
+<td>0010000</td>
+<td>0010000</td>
+<td>0</td>
+</tr>
+</table>
+<p>1.0</p></body>
+</html>

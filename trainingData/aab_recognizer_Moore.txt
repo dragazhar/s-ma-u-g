@@ -1,0 +1,6 @@
+babaabaabaab, 0000001001001
+bbaabaaaaaba, 0000010000010
+bbbaabbbaabb, 0000001000010
+bbaabbaabaaa, 0000010001000
+aabbaaaabbbb, 0001000001000
+aababaaababb, 0001000001000
