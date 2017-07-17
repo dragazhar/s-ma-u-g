@@ -58,7 +58,7 @@ public class TransitionFunctionCSR {
      * @param k
      * @return
      */
-    public static long computeNumberOfFlags(int n, int k) {
+    public long computeNumberOfFlags(int n, int k) {
 	long bc = binomialCoefficient(k * n, n);
 	long fr = (k - 1) * n + 1;
 	long cnk = bc / fr;
@@ -155,7 +155,7 @@ public class TransitionFunctionCSR {
     /**
      * Generate all possible flags
      */
-    public static void enumerateFlags() {
+    public void enumerateFlags() {
 	initFlag();
 	while (!isFinalFlag()) {
 	    nextFlag(numOfStates - 1);

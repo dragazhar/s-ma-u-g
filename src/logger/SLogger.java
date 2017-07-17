@@ -1,87 +1,43 @@
 package logger;
 
 import java.io.IOException;
-
-import java.util.logging.ConsoleHandler;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
-
-import java.util.logging.Formatter;
-
-import java.util.logging.Level;
-
-import java.util.logging.Logger;
-
-import java.util.logging.SimpleFormatter;
-
+import java.util.logging.*;
+import configuration.Config;
 import logger.HTMLFormatter;
 
+public class SLogger {
 
-public class SLogger 
-    {
+    static private FileHandler fileTxt;
+    static private SimpleFormatter formatterTxt;
+    static private FileHandler fileHTML;
+    static private Formatter formatterHTML;
 
-	  static private FileHandler fileTxt;
+    static public void setup() throws IOException {
 
-	  static private SimpleFormatter formatterTxt;
+	// get the global logger to configure it
+	Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	// suppress the logging output to the console
+	Logger rootLogger = Logger.getLogger("");
+	Handler[] handlers = rootLogger.getHandlers();
 
+	if (handlers[0] instanceof ConsoleHandler) {
+	    rootLogger.removeHandler(handlers[0]);
+	}
 
+	logger.setLevel(Config.LOG_LEVEL);
+	fileTxt = new FileHandler(Config.LOG_TXT_FILENAME);
+	fileHTML = new FileHandler(Config.LOG_HTML_FILENAME);
 
-	  static private FileHandler fileHTML;
+	// create a TXT formatter
+	formatterTxt = new SimpleFormatter();
+	fileTxt.setFormatter(formatterTxt);
+	logger.addHandler(fileTxt);
 
-	  static private Formatter formatterHTML;
+	// create an HTML formatter
+	formatterHTML = new HTMLFormatter();
+	fileHTML.setFormatter(formatterHTML);
+	logger.addHandler(fileHTML);
 
-
-
-	  static public void setup() throws IOException {
-
-
-
-	    // get the global logger to configure it
-
-	    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
-
-
-	    // suppress the logging output to the console
-
-	    Logger rootLogger = Logger.getLogger("");
-
-	    Handler[] handlers = rootLogger.getHandlers();
-
-	    if (handlers[0] instanceof ConsoleHandler) {
-
-	      rootLogger.removeHandler(handlers[0]);
-
-	    }
-
-
-
-	    logger.setLevel(Level.INFO);
-
-	    fileTxt = new FileHandler("Logging.txt");
-
-	    fileHTML = new FileHandler("log.html");
-
-  // create a TXT formatter
-
-	    formatterTxt = new SimpleFormatter();
-
-	    fileTxt.setFormatter(formatterTxt);
-
-	    logger.addHandler(fileTxt);
-
-
-
-	    // create an HTML formatter
-
-	    formatterHTML = new HTMLFormatter();
-
-	    fileHTML.setFormatter(formatterHTML);
-
-	    logger.addHandler(fileHTML);
-	    
-
-	  }
-
+    }
 
 }

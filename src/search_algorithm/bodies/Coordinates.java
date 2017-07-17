@@ -1,4 +1,4 @@
-package search_algorithm;
+package search_algorithm.bodies;
 
 import java.util.Arrays;
 

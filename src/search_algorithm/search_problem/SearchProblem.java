@@ -1,19 +1,22 @@
-package search_algorithm;
+package search_algorithm.search_problem;
 
 import java.io.IOException;
+
+import search_algorithm.bodies.Point;
+
+import configuration.ConfigValues;
 
 import fsm.Alphabet;
 
 public abstract class SearchProblem {
-    public static final int MOORE_MACHINE=0;
-    public static final int MEALY_MACHINE=1;
+
 
     private String name="";
 
     private int n = 0;
     private int k = 0;
     private int m = 0;
-    private int type=MOORE_MACHINE;
+    private int type=ConfigValues.MOORE_MACHINE;
     
     private Alphabet alpha =new Alphabet();
     private Alphabet beta =new Alphabet();

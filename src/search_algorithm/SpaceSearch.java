@@ -1,5 +1,12 @@
 package search_algorithm;
 
+import search_algorithm.bodies.Body;
+import search_algorithm.bodies.Coordinates;
+import search_algorithm.bodies.Key;
+import search_algorithm.bodies.Point;
+import search_algorithm.dgso.Laws;
+import configuration.Config;
+
 public class SpaceSearch {
     public static Point search(Universe uVerse) {
 	Point gPoint = uVerse.bestPoint;
@@ -32,13 +39,13 @@ public class SpaceSearch {
 	  
 	    for (Body b : uVerse.bodies) {
 		// add explored point to search space
-		Point point = new Point(b.newPosition.coordinatesT,
-			b.newPosition.coordinatesO);
+		Point point = new Point(b.getNewPosition().coordinatesT,
+			b.getNewPosition().coordinatesO);
 		double score = 0;
 		point.generated = cEpoch;
 
 		int keyT = uVerse.localPointTtoInteger(point.coordinatesT);
-			int keyU=uVerse.iRangeT;
+			int keyU=uVerse.universeId;
 		int keyO = uVerse.localPointOtoInteger(point.coordinatesO);
 		Key key = new Key(keyU, keyT, keyO);
 		point.setKey(key);
@@ -58,12 +65,10 @@ public class SpaceSearch {
 
 		}
 
-		b.mass = score;
+		b.setMass(score);
 		// update local best
-		if (b.mass > b.bestMass) {
-		    b.bestMass = b.mass;
-		    b.bestPosition = b.newPosition;
-		}
+		b.updateLocalBest();
+		
 		// update global best
 		if (point.getValue() > uVerse.bestPoint.getValue()) {
 		   // System.out.println("update besty");
@@ -73,8 +78,8 @@ public class SpaceSearch {
 		    //System.out.println(point+" for update");
 		    //System.out.println("After: "+key+" "+uVerse.bestPoint);
 		}
-		b.position = b.newPosition;
-		b.velocity = b.newVelocity;
+		b.replaceByNewPosition();
+		b.replaceByNewVelocity();
 		if (point.getValue() == 1.0) {
 //		    System.out.println("Solution found at epoch: "
 //			    + (cEpoch + 1));
@@ -94,18 +99,17 @@ public class SpaceSearch {
     private static void computeNewPositions(Universe uVerse, int cEpoch, Coordinates globalBestPosition, double globalBestMass)
 	{
 	    for (Body b : uVerse.bodies) {
-	  		double f1 = Laws.computeForce(uVerse, cEpoch, b.mass,
-	  			b.bestMass, b.position, b.bestPosition);
+	  		double f1 = Laws.computeForce(uVerse, cEpoch, b.getMass(),
+	  			b.getBestMass(), b.getPosition(), b.getBestPosition());
 	  		
-	  		double f2 = Laws.computeForce(uVerse, cEpoch, b.mass,
-	  			globalBestMass, b.position, globalBestPosition);
+	  		double f2 = Laws.computeForce(uVerse, cEpoch, b.getMass(),
+	  			globalBestMass, b.getPosition(), globalBestPosition);
 
-	  		b.newVelocity = Laws.accelerate(f1, f2, b.velocity,
-	  			b.bestPosition, globalBestPosition);
-	  		b.newPosition = Laws.move(b.mass, b.position, b.newVelocity);
-	  		b.newPosition = Laws.rndMove(Explorer.rndMoveProb, b.newPosition,
-	  			uVerse.generateRNDCoordinates());
-	  		//System.out.println(b.position+" new "+b.newPosition);
+	  		b.setNewVelocity(Laws.accelerate(f1, f2, b.getVelocity(),
+	  			b.getBestPosition(), globalBestPosition)) ;
+	  		b.setNewPosition( Laws.move(b.getMass(), b.getPosition(), b.getNewVelocity()));
+	  		b.setNewPosition(Laws.rndMove(Config.PROBABILITY_OF_RANDOM_MOVE, b.getNewPosition(),
+	  			uVerse.generateRNDCoordinates()));
 	  	    }
 	}
 

@@ -5,9 +5,14 @@ import java.util.ArrayList;
 
 import java.util.logging.Logger;
 
+import configuration.Benchmarks;
+import configuration.Config;
+
 import logger.SLogger;
 
 
+import search_algorithm.bodies.Point;
+import search_algorithm.search_problem.SearchProblem;
 import visualization.NamedSeriesOfPoints;
 import visualization.ScoreGraph;
 import visualization.ScoreGraph2D;
@@ -16,48 +21,29 @@ public class Explorer {
     private final static Logger LOGGER = Logger
 	    .getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    static double pc1 = 0.00005; //0.002 for 5 santafe, 0.00015 for 6, 7
-    static double pc2 = 0.00005;
-    static double rndMoveProb = 0.1;
-    static int pointSize = 5;
-    static boolean exploreAll =true;
-    static boolean visualization = false;
-
     /**
      * @param args
      */
     public static void main(String[] args) throws IOException {
+	// Create logger
 	try {
-
 	    SLogger.setup();
-
 	} catch (IOException e) {
-
 	    e.printStackTrace();
-
 	    throw new RuntimeException("Problems with creating the log files");
-
 	}
-	for (int step=0; step<10; step++){
+
+	
+	for (int step=0; step<Config.RUN_TIMES; step++){
 	Multiverse mVerse = new Multiverse();
-	// SearchProblem sp = ProblemDescriptions.abRecognizer();
-	// SearchProblem sp = ProblemDescriptions.aabRecognizer();
-	// SearchProblem sp = ProblemDescriptions.upDownCounter();
-	// SearchProblem sp = ProblemDescriptions.halves();
-	// SearchProblem sp = ProblemDescriptions.parityChecker();
-	// SearchProblem sp = ProblemDescriptions.twoUnitDelay();
-	//SearchProblem sp = ProblemDescriptions.ant1();
-	SearchProblem sp = ProblemDescriptions.ant2();
-	// SearchProblem sp = ProblemDescriptions.predictor11100();
-	// SearchProblem sp = ProblemDescriptions.predictor001111();
-	// SearchProblem sp = ProblemDescriptions.predictorMohhamed100();
-	// ProblemDescriptions.predictor1111010010111101001();
+	SearchProblem sp = Benchmarks.returnBenchmark();
+
 	mVerse.create(sp);
-	//LOGGER.info(mVerse);
+	LOGGER.info(mVerse.toString());
 	long pointInMultiverseChecked=0;
 	int nExplored = 0;
-	if (exploreAll) {
-	    HyperSpaceSearch.initMVerse(mVerse, Explorer.pc1, Explorer.pc2);
+	if (Config.EXPLORE_ALL) {
+	    HyperSpaceSearch.initMVerse(mVerse, Config.GENERATE_PROCENT_TRANSITION_FUNCTION,Config.GENERATE_PROCENT_OUTPUT_FUNCTION);
 	    while ((!mVerse.found)
 		    && (nExplored < mVerse.getSizeofMultiverse())) {
 		
@@ -74,7 +60,7 @@ public class Explorer {
 //	LOGGER.info("Points in universe checked: "
 //		+ bUniverse.points.size());
 //	LOGGER.info(pointBefore+"; "+ bUniverse.points.size()+"; "+String.format("%.2f",bestBefore)+"; "+String.format("%.2f",solution.getValue()));
-		if (!visualization) {
+		if (!Config.VISUALIZE) {
 		    bUniverse.clearPoints();
 		}
 		if (mVerse.solution == null) {
@@ -110,7 +96,7 @@ public class Explorer {
 	     int[] flag = { 0, 0, 1, 2, 3, 6, 8, 9 };
 	    System.out.println("by flag");
 	    Universe bUniverse = HyperSpaceSearch.searchByFlag(mVerse, flag);
-	    bUniverse.generateRNDPoints(Explorer.pc1, Explorer.pc2);
+	    bUniverse.generateRNDPoints(Config.GENERATE_PROCENT_TRANSITION_FUNCTION, Config.GENERATE_PROCENT_OUTPUT_FUNCTION);
 	    System.out.println(bUniverse.toString2());
 	    Point solution = SpaceSearch.searchGravI(bUniverse);
 
@@ -138,10 +124,10 @@ public class Explorer {
 	//sp.printSolution(mVerse.solution);
     LOGGER.info("points cheked: "+pointInMultiverseChecked+" explored: "+nExplored+" found "+ mVerse.found);  
 	// Visualization
-	if (visualization) {
-	    System.out.println("Points checked: "
+	if (Config.VISUALIZE) {
+	    LOGGER.info("Points checked: "
 		    + mVerse.computeActualSearchSpaceSize());
-	    System.out.println("Explored "
+	    LOGGER.info("Explored "
 		    + (double) mVerse.computeActualSearchSpaceSize()
 		    / mVerse.searchSpaceSize + " of points (out of 1.0)");
 	   ArrayList<NamedSeriesOfPoints> data = new ArrayList<NamedSeriesOfPoints>();
@@ -153,7 +139,7 @@ public class Explorer {
 	    if (sp.getM() == 0) {
 		ScoreGraph.drawData("", "point", "Score", data);
 	    } else {
-		ScoreGraph2D.draw("", data, true, Explorer.pointSize);
+		ScoreGraph2D.draw("", data, true, Config.SIZE_OF_POINT);
 	    }
 	}
 	System.out.println("finished "+step+" step");

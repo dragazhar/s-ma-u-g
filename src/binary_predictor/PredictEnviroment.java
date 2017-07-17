@@ -2,9 +2,11 @@ package binary_predictor;
 
 import java.io.IOException;
 
+import configuration.ConfigValues;
+
 import representation.MeFST_S_CSR;
-import search_algorithm.Point;
-import search_algorithm.SearchProblem;
+import search_algorithm.bodies.Point;
+import search_algorithm.search_problem.SearchProblem;
 
 
 public class PredictEnviroment extends SearchProblem {
@@ -23,7 +25,7 @@ public class PredictEnviroment extends SearchProblem {
   	this.setAlpha(Predictor.inputs);
   	this.setBeta(Predictor.outputs);
   	this.setK(Predictor.inputs.getSizeOfAlphabet());
-  	this.setType(SearchProblem.MEALY_MACHINE);
+  	this.setType(ConfigValues.MEALY_MACHINE);
   	this.setM(Predictor.outputs.getSizeOfAlphabet());
 
 

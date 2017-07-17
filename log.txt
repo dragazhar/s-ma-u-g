@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<head>
-<link rel="stylesheet" href="css/smaug.css"/></head>
-<body>
-<table class="log__table">
-<tr>
-	<th>Loglevel</th>
-	<th>Time</th>
-	<th>Log Message</th>
-</tr>
-<tr>
-	<td>INFO</td>
-	<td>Juuli 17,2017 16:37</td>
-	<td>Multiverse: 
+17.07.2017 16:37:20 search_algorithm.Explorer main
+INFO: Multiverse: 
 Input alphabet: < b a >
 Output alphabet: < 0 1 >
 Number of parallel Universes: 14
@@ -30,23 +18,10 @@ Size of search space: 83968
  11 Universe: (0, 1, 4): 1 2 * * 3 * * * 	Size: 576 * 16 	
  12 Universe: (0, 1, 3): 1 2 * 3 * * * * 	Size: 768 * 16 	
  13 Universe: (0, 1, 2): 1 2 3 * * * * * 	Size: 1024 * 16 	
-</td>
-</tr>
-<tr>
-	<td>INFO</td>
-	<td>Juuli 17,2017 16:37</td>
-	<td>points cheked: 0 explored: 0 found true</td>
-</tr>
-<tr>
-	<td>INFO</td>
-	<td>Juuli 17,2017 16:37</td>
-	<td>Points checked: 371</td>
-</tr>
-<tr>
-	<td>INFO</td>
-	<td>Juuli 17,2017 16:37</td>
-	<td>Explored 0.004418349847560976 of points (out of 1.0)</td>
-</tr>
-</table>
-</body>
-</html>
+
+17.07.2017 16:37:20 search_algorithm.Explorer main
+INFO: points cheked: 0 explored: 0 found true
+17.07.2017 16:37:20 search_algorithm.Explorer main
+INFO: Points checked: 371
+17.07.2017 16:37:20 search_algorithm.Explorer main
+INFO: Explored 0.004418349847560976 of points (out of 1.0)

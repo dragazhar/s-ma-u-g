@@ -6,6 +6,10 @@ import java.util.TreeMap;
 
 import representation.OutputFunctionSR;
 import representation.TransitionFunctionCSR;
+import search_algorithm.bodies.Body;
+import search_algorithm.bodies.Coordinates;
+import search_algorithm.bodies.Key;
+import search_algorithm.bodies.Point;
 
 public class Universe {
     Multiverse mVerse;
@@ -20,7 +24,7 @@ public class Universe {
 
     int[] mask;
 
-    int iRangeT = 0;
+    int universeId = 0;
 
     private double averageMassSumm = 0;
     private double maxMass = 0;
@@ -29,7 +33,7 @@ public class Universe {
 
     public Point bestPoint;
 
-    public Universe(Multiverse mVerse, int[] flag, int range) {
+    public Universe(Multiverse mVerse, int[] flag, int universeId) {
 	super();
 	this.mVerse = mVerse;
 	this.flag = flag;
@@ -39,7 +43,7 @@ public class Universe {
 	this.sizeTO = this.sizeT * this.sizeO;
 
 	this.mask = mVerse.mVerseCSR.genAddressMask(flag);
-	this.iRangeT = range;
+	this.universeId = universeId;
 
     }
 
@@ -80,7 +84,7 @@ public class Universe {
 			nO = 1;
 		}
 		int keyT = this.localPointTtoInteger(coordT);
-		int keyU = this.iRangeT;
+		int keyU = this.universeId;
 
 		for (int j = 0; j < nO; j++) {
 		    int[] coordO = generateRNDCoordinatesO();
@@ -140,7 +144,7 @@ public class Universe {
 
 	    for (int[] pO : pointsO) {
 		Point point = new Point(pT, pO);
-		int keyU = this.iRangeT;
+		int keyU = this.universeId;
 		int keyT = this.localPointTtoInteger(pT);
 		int keyO = this.localPointOtoInteger(pO);
 		Key key = new Key(keyU, keyT, keyO);
@@ -246,8 +250,6 @@ public class Universe {
 	s += " * ";
 	s += this.sizeO;
 	s += " \t";
-	s += "From: " + this.iRangeT + " to: "
-		+ (this.iRangeT + this.sizeT - 1);
 	return s;
 
     }

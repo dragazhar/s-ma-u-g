@@ -1,5 +1,8 @@
-package search_algorithm;
+package search_algorithm.dgso;
 
+import search_algorithm.Universe;
+import search_algorithm.bodies.Coordinates;
+import configuration.Config;
 
 public class Laws {
 
@@ -8,7 +11,7 @@ public class Laws {
 	return (1 - cEpoch / tEpoch);
     }
 
-    static double computeForce(Universe uVerse, int cEpoch, double m1,
+    public static double computeForce(Universe uVerse, int cEpoch, double m1,
 	    double m2, Coordinates p1, Coordinates p2) {
 	double force = 0.0;
 	int dist = distance(p1, p2);
@@ -19,12 +22,12 @@ public class Laws {
 	return force;
     }
 
-    static int getMaxAge(Universe uVerse) {
+    public static int getMaxAge(Universe uVerse) {
 	double age = 0;
-	//double coeff = (uVerse.sizeTO / uVerse.points.size());
-	double coeff = (uVerse.sizeTO / uVerse.bodies.size());
-	//age = Math.floor(coeff);
-	age=50;
+	// double coeff = (uVerse.sizeTO / uVerse.points.size());
+	// double coeff = (uVerse.sizeTO / uVerse.bodies.size());
+	// age = Math.floor(coeff);
+	age = Config.MAX_UNIVERSE_AGE;
 	return (int) age;
     }
 
@@ -40,7 +43,7 @@ public class Laws {
 	}
 
 	for (int i = 0; i < velocity.coordinatesO.length; i++) {
-	    if (Math.random() <force1) {
+	    if (Math.random() < force1) {
 		newVelocity.coordinatesO[i] = pBest.coordinatesO[i];
 	    }
 	}
@@ -66,25 +69,26 @@ public class Laws {
 		position.coordinatesO);
 
 	for (int i = 0; i < velocity.coordinatesT.length; i++) {
-	    if (Math.random() <(1 - inertialM)) {
+	    if (Math.random() < (1 - inertialM)) {
 		newPosition.coordinatesT[i] = velocity.coordinatesT[i];
 	    }
 	}
 
 	for (int i = 0; i < velocity.coordinatesO.length; i++) {
-	    if (Math.random() <(1 - inertialM)) {
+	    if (Math.random() < (1 - inertialM)) {
 		newPosition.coordinatesO[i] = velocity.coordinatesO[i];
 	    }
 	}
 
 	return newPosition;
     }
-    
-  static public Coordinates rndMove(double prob, Coordinates position, Coordinates rnd) {
+
+    static public Coordinates rndMove(double prob, Coordinates position,
+	    Coordinates rnd) {
 	Coordinates newPosition = new Coordinates(position.coordinatesT,
 		position.coordinatesO);
-	for (int i = 0; i <position.coordinatesT.length; i++) {
-	    if (Math.random() <prob) {
+	for (int i = 0; i < position.coordinatesT.length; i++) {
+	    if (Math.random() < prob) {
 		newPosition.coordinatesT[i] = rnd.coordinatesT[i];
 	    }
 	}
@@ -96,8 +100,6 @@ public class Laws {
 	}
 	return newPosition;
     }
-    
-    
 
     static public int distance(Coordinates p1, Coordinates p2) {
 	int distT = 0;

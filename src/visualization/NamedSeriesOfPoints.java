@@ -2,8 +2,8 @@ package visualization;
 
 import java.util.TreeMap;
 
-import search_algorithm.Point;
-import search_algorithm.Key;
+import search_algorithm.bodies.Key;
+import search_algorithm.bodies.Point;
 
 public class NamedSeriesOfPoints {
     String seriesName = "";

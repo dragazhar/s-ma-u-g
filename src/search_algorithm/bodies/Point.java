@@ -1,6 +1,7 @@
-package search_algorithm;
+package search_algorithm.bodies;
 
 import java.util.Arrays;
+
 
 public class Point extends Coordinates{
     public Point(int[] coordinatesT, int[] coordinatesO) {

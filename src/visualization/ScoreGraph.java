@@ -15,8 +15,8 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-import search_algorithm.Point;
-import search_algorithm.Key;
+import search_algorithm.bodies.Key;
+import search_algorithm.bodies.Point;
 
 public class ScoreGraph {
     
@@ -52,10 +52,10 @@ public class ScoreGraph {
 	}
 	XYPlot xyPlot = chart.getXYPlot();
 	ValueAxis rangeAxis = xyPlot.getRangeAxis();
-	rangeAxis.setLowerBound(min) ; 
-	rangeAxis.setUpperBound(100) ; 
-	ValueAxis domainAxis = xyPlot.getDomainAxis();
-	domainAxis.setUpperBound(max)  ; 
+	//rangeAxis.setLowerBound(min) ; 
+	//rangeAxis.setUpperBound(100) ; 
+	//ValueAxis domainAxis = xyPlot.getDomainAxis();
+	//domainAxis.setUpperBound(max)  ; 
 
 
 	

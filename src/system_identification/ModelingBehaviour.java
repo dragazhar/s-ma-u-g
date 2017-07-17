@@ -2,12 +2,14 @@ package system_identification;
 
 import java.io.IOException;
 
+import configuration.ConfigValues;
+
 import representation.D_CSR_MoFST;
 import representation.MeFST_S_CSR;
 import representation.MoFST_S_CSR;
-import search_algorithm.Point;
 
-import search_algorithm.SearchProblem;
+import search_algorithm.bodies.Point;
+import search_algorithm.search_problem.SearchProblem;
 
 public class ModelingBehaviour extends SearchProblem {
     Behaviour trainingData;
@@ -32,7 +34,7 @@ public class ModelingBehaviour extends SearchProblem {
     public double getPointScore(Point p) {
 	double score = 0;
 	switch (this.getType()) {
-	case ModelingBehaviour.MOORE_MACHINE:
+	case ConfigValues.MOORE_MACHINE:
 	    if (this.getM() == 0) {
 		D_CSR_MoFST representation = new D_CSR_MoFST(this.getN(),
 			this.getK());
@@ -58,7 +60,7 @@ public class ModelingBehaviour extends SearchProblem {
 		score = machine.getScore();
 	    }
 	    break;
-	case ModelingBehaviour.MEALY_MACHINE:
+	case ConfigValues.MEALY_MACHINE:
 	    if (this.getM() == 0) {
 
 	    } else {
@@ -85,7 +87,7 @@ public class ModelingBehaviour extends SearchProblem {
     @Override
     public void printSolution(Point p) throws IOException {
 	switch (this.getType()) {
-	case ModelingBehaviour.MOORE_MACHINE:
+	case ConfigValues.MOORE_MACHINE:
 	    if (this.getM() == 0) {
 		MooreFSTDecorated machine = new MooreFSTDecorated(
 			this.getAlpha(), this.getBeta());
@@ -115,7 +117,7 @@ public class ModelingBehaviour extends SearchProblem {
 			this.trainingData);
 	    }
 	    break;
-	case ModelingBehaviour.MEALY_MACHINE:
+	case ConfigValues.MEALY_MACHINE:
 	    MealyFST machine = new MealyFST(this.getAlpha(), this.getBeta());
 	   MeFST_S_CSR representation = new MeFST_S_CSR(this.getN(),
 		    this.getK());

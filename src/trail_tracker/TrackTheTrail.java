@@ -4,10 +4,12 @@ package trail_tracker;
 
 import java.io.IOException;
 
-import representation.MeFST_S_CSR;
-import search_algorithm.Point;
+import configuration.ConfigValues;
 
-import search_algorithm.SearchProblem;
+import representation.MeFST_S_CSR;
+
+import search_algorithm.bodies.Point;
+import search_algorithm.search_problem.SearchProblem;
 
 public class TrackTheTrail extends SearchProblem {
 	Trail trail;
@@ -21,7 +23,7 @@ public class TrackTheTrail extends SearchProblem {
 		this.setAlpha(TrailTracker.events);
 		this.setBeta(TrailTracker.actions);
 		this.setK(TrailTracker.events.getSizeOfAlphabet());
-		this.setType(SearchProblem.MEALY_MACHINE);
+		this.setType(ConfigValues.MEALY_MACHINE);
 		this.setM(TrailTracker.actions.getSizeOfAlphabet());
 
 	}

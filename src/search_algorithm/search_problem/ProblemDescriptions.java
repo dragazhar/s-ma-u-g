@@ -1,6 +1,8 @@
-package search_algorithm;
+package search_algorithm.search_problem;
 
 import java.io.IOException;
+
+import configuration.ConfigValues;
 
 import binary_predictor.PredictEnviroment;
 
@@ -11,7 +13,7 @@ public class ProblemDescriptions {
    
    public static SearchProblem abRecognizer() throws IOException{
        SearchProblem sp = new ModelingBehaviour(3,
-		SearchProblem.MOORE_MACHINE, true,
+		ConfigValues.MOORE_MACHINE, true,
 		"trainingData\\ab_moore.txt", "abRecognizer");
        return sp;
    }
@@ -19,13 +21,13 @@ public class ProblemDescriptions {
    
    public static SearchProblem aabRecognizer() throws IOException{
        SearchProblem sp = new ModelingBehaviour(4,
-		SearchProblem.MOORE_MACHINE, true,
+	       ConfigValues.MOORE_MACHINE, true,
 		"trainingData\\aab_recognizer_Moore.txt", "aabRecognizer");
        return sp;
    }
    public static SearchProblem upDownCounter() throws IOException{
        SearchProblem sp = new ModelingBehaviour(4,
-		SearchProblem.MOORE_MACHINE,false,
+	       ConfigValues.MOORE_MACHINE,false,
 		"trainingData\\up_down_counter_Moore.txt", "UpDownCounter");
        //for S-CSR visualization is to huge
        return sp;
@@ -34,20 +36,20 @@ public class ProblemDescriptions {
    
    public static SearchProblem halves() throws IOException{
        SearchProblem sp = new ModelingBehaviour(4,
-		SearchProblem.MOORE_MACHINE, true,
+	       ConfigValues.MOORE_MACHINE, true,
 		"trainingData\\halves_moore.txt", "div2");
        return sp;
    }
   
    public static SearchProblem parityChecker() throws IOException{
        SearchProblem sp = new ModelingBehaviour(2,
-		SearchProblem.MEALY_MACHINE,true,
+	       ConfigValues.MEALY_MACHINE,true,
 		"trainingData\\parity_Checker_Mealy.txt", "parityChecker");
        return sp;
    }
    public static SearchProblem twoUnitDelay() throws IOException{
        SearchProblem sp = new ModelingBehaviour(4,
-		SearchProblem.MEALY_MACHINE,true,
+	       ConfigValues.MEALY_MACHINE,true,
 		"trainingData\\two_unit_delay_Mealy.txt", "twoUnitDelay");
        return sp;
    }

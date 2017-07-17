@@ -1,4 +1,4 @@
-package search_algorithm;
+package search_algorithm.bodies;
 
 public class Key implements Comparable<Key> {
     private Long keyT = (long) 0;
@@ -7,7 +7,7 @@ public class Key implements Comparable<Key> {
 
     /**
      * 
-     * Key U-universe number, T- transition function code, O - outputfunction code
+     * Key U-universe number, T- transition function code, O - output function code
      * @param key1
      * @param key2
      * @param key3

@@ -1,7 +1,7 @@
 package visualization;
 
-import search_algorithm.Point;
-import search_algorithm.Key;
+import search_algorithm.bodies.Key;
+import search_algorithm.bodies.Point;
 
 import java.awt.Color;
 import java.util.ArrayList;

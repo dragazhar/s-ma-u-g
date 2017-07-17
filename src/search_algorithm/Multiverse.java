@@ -2,8 +2,12 @@ package search_algorithm;
 
 import java.util.ArrayList;
 
+import configuration.ConfigValues;
+
 import representation.OutputFunctionSR;
 import representation.TransitionFunctionCSR;
+import search_algorithm.bodies.Point;
+import search_algorithm.search_problem.SearchProblem;
 
 public class Multiverse {
     SearchProblem searchProblem;
@@ -33,15 +37,11 @@ public class Multiverse {
 		searchProblem.getK());
 
 	mVerseCSR.enumerateFlags();
-	int iRange = 0;
 	for (int i = 0; i < sizeofMultiverse; i++) {
 	    Universe uVerse = new Universe(this,
-		    mVerseCSR.allPossibleFlags.get(i), iRange);
+		    mVerseCSR.allPossibleFlags.get(i), i);
 	    parallelUniverses.add(uVerse);
-/*	    if (Explorer.exploreAll) {
-		
-	    }*/
-	    iRange += uVerse.sizeT;
+
 	}
 	searchSpaceSize = computeSearchSpaceSize();
     }
@@ -53,11 +53,11 @@ public class Multiverse {
 	    dimensionO = 1;// D_CSR(FST)
 	} else {
 	    switch (searchProblem.getType()) {
-	    case SearchProblem.MOORE_MACHINE: {
+	    case ConfigValues.MOORE_MACHINE: {
 		dimensionO = searchProblem.getN();
 		break;
 	    }
-	    case SearchProblem.MEALY_MACHINE: {
+	    case ConfigValues.MEALY_MACHINE: {
 		dimensionO = searchProblem.getN() * searchProblem.getK();
 
 		break;
