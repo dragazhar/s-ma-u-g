@@ -1,4 +1,7 @@
-package search_algorithm;
+package search_algorithm.multiverse_search;
+
+import search_algorithm.Multiverse;
+import search_algorithm.Universe;
 
 public class HyperSpaceSearch {
 
@@ -14,7 +17,7 @@ public class HyperSpaceSearch {
 	int fne = 0;
 	// find first not explored space
 	for (int i = 0; i < mVerse.getSizeofMultiverse(); i++) {
-	    if (!mVerse.parallelUniverses.get(i).explored) {
+	    if (!mVerse.parallelUniverses.get(i).isExplored()) {
 		bUniverse = mVerse.parallelUniverses.get(i);
 		fne = i;
 		break;
@@ -31,7 +34,7 @@ public class HyperSpaceSearch {
 
 	   
 	      if ((bUniverse.getMaxMass() < currentUniverse.getMaxMass()) &&
-	      (!currentUniverse.explored)) { bUniverse = currentUniverse; }
+	      (!currentUniverse.isExplored())) { bUniverse = currentUniverse; }
 	    
 	}
 

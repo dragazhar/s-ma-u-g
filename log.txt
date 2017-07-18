@@ -1,6 +1,5 @@
-17.07.2017 16:37:20 search_algorithm.Explorer main
-INFO: Multiverse: 
-Input alphabet: < b a >
+Multiverse: 
+Input alphabet: < 1 0 >
 Output alphabet: < 0 1 >
 Number of parallel Universes: 14
 Size of search space: 83968
@@ -19,9 +18,20 @@ Size of search space: 83968
  12 Universe: (0, 1, 3): 1 2 * 3 * * * * 	Size: 768 * 16 	
  13 Universe: (0, 1, 2): 1 2 3 * * * * * 	Size: 1024 * 16 	
 
-17.07.2017 16:37:20 search_algorithm.Explorer main
-INFO: points cheked: 0 explored: 0 found true
-17.07.2017 16:37:20 search_algorithm.Explorer main
-INFO: Points checked: 371
-17.07.2017 16:37:20 search_algorithm.Explorer main
-INFO: Explored 0.004418349847560976 of points (out of 1.0)
+id	maximal
+0	0.75
+1	0.75
+2	0.75
+3	0.75
+4	0.75
+5	0.8214285714285714
+6	0.8214285714285714
+7	0.9285714285714286
+8	0.9285714285714286
+9	1.0
+10	0.8214285714285714
+11	0.8214285714285714
+12	0.8928571428571429
+13	0.9285714285714286
+Universes with solutions: [9]
+Correctly predicted: 816 out of 1000: 0.816

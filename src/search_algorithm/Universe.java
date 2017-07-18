@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.TreeMap;
 
+import configuration.Config;
+
 import representation.OutputFunctionSR;
 import representation.TransitionFunctionCSR;
 import search_algorithm.bodies.Body;
@@ -116,7 +118,7 @@ public class Universe {
 			averageMassSumm += point.getValue();
 		    }
 
-		    if (score == 1.0) {
+		    if ((score == 1.0) && Config.EXIT_INIT_AT_MAX) {
 			mVerse.found = true;
 			mVerse.solution = point;
 			return;

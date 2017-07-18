@@ -12,6 +12,7 @@ import logger.SLogger;
 
 
 import search_algorithm.bodies.Point;
+import search_algorithm.multiverse_search.HyperSpaceSearch;
 import search_algorithm.search_problem.SearchProblem;
 import visualization.NamedSeriesOfPoints;
 import visualization.ScoreGraph;

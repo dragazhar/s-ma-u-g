@@ -8,7 +8,7 @@ import logger.HTMLFormatter;
 public class SLogger {
 
     static private FileHandler fileTxt;
-    static private SimpleFormatter formatterTxt;
+    static private TXTFormatter formatterTxt;
     static private FileHandler fileHTML;
     static private Formatter formatterHTML;
 
@@ -26,18 +26,21 @@ public class SLogger {
 
 	logger.setLevel(Config.LOG_LEVEL);
 	fileTxt = new FileHandler(Config.LOG_TXT_FILENAME);
-	fileHTML = new FileHandler(Config.LOG_HTML_FILENAME);
+	if (Config.HTML_OUTPUT) {
+	    fileHTML = new FileHandler(Config.LOG_HTML_FILENAME);
+	}
 
 	// create a TXT formatter
-	formatterTxt = new SimpleFormatter();
+	formatterTxt = new TXTFormatter();//SimpleFormatter();
 	fileTxt.setFormatter(formatterTxt);
 	logger.addHandler(fileTxt);
 
 	// create an HTML formatter
-	formatterHTML = new HTMLFormatter();
-	fileHTML.setFormatter(formatterHTML);
-	logger.addHandler(fileHTML);
-
+	if (Config.HTML_OUTPUT) {
+	    formatterHTML = new HTMLFormatter();
+	    fileHTML.setFormatter(formatterHTML);
+	    logger.addHandler(fileHTML);
+	}
     }
 
 }
