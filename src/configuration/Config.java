@@ -9,7 +9,7 @@ public class Config {
 
     // Visualization
     public static final int SIZE_OF_POINT = 10;
-    public static final boolean VISUALIZE = true;
+    public static final boolean VISUALIZE = false;
 
     // Multiverse controls
     public static final double GENERATE_PROCENT_TRANSITION_FUNCTION = 0.2;
@@ -19,11 +19,11 @@ public class Config {
     public static final boolean EXIT_INIT_AT_MAX = false;
 
     // Task
-    public static final int BENCHMARK = ConfigValues.HALVES;
-    public static final int RUN_TIMES = 1000;//ConfigValues.RUN_ONCE;
+    public static final int BENCHMARK = ConfigValues.PREDICTOR_001111;
+    public static final int RUN_TIMES = ConfigValues.RUN_ONCE;
 
     // Logger
-    public static final Level LOG_LEVEL = Level.INFO;
+    public static final Level LOG_LEVEL = Level.WARNING;
     public static final String LOG_TXT_FILENAME = "log.txt";
     public static final String LOG_HTML_FILENAME = "log.html";
     public static final boolean HTML_OUTPUT = false;

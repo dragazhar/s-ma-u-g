@@ -8,14 +8,23 @@ import search_algorithm.Multiverse;
 import search_algorithm.Universe;
 import search_algorithm.search_problem.SearchProblem;
 import configuration.Benchmarks;
-import configuration.Config;
+
 
 import logger.SLogger;
 
 public class PredictBySampling {
     private final static Logger LOGGER = Logger
 	    .getLogger(Logger.GLOBAL_LOGGER_NAME);
+    
+    public static final int RUN_TIMES = 1000;
+    public static final double GENERATE_PROCENT_MIN = 0.05f;
+    public static final double GENERATE_PROCENT_MAX = 0.3f;
+    public static final double GENERATE_PROCENT_STEP = 0.05f;
+    
+    public static double procent=GENERATE_PROCENT_MIN;
+    
     public static ArrayList<Integer> bestUniversesID = new ArrayList<Integer>();
+
 
     public static void main(String[] args) throws IOException {
 	// Create logger
@@ -29,34 +38,42 @@ public class PredictBySampling {
 	SearchProblem sp = Benchmarks.returnBenchmark();
 
 	canonicalVerse.create(sp);
-	LOGGER.info(canonicalVerse.toString());
+	LOGGER.warning(sp.getName());
+	LOGGER.warning(canonicalVerse.toString());
 
 	HyperSpaceSearch.initMVerse(canonicalVerse, 1.0, 1.0);
 
 	Universe bUniverse = null;
-	LOGGER.info("id" + "\t" + "maximal");
+	LOGGER.warning("id" + "\t" + "maximal");
 	for (int i = 0; i < canonicalVerse.getSizeofMultiverse(); i++) {
 	    bUniverse = canonicalVerse.parallelUniverses.get(i);
-	    LOGGER.info(i +  "\t"
-		    + bUniverse.getMaxMass());
+	    LOGGER.warning(i + "\t" + bUniverse.getMaxMass());
 
 	    if (bUniverse.getMaxMass() == 1.0) {
 		bestUniversesID.add(i);
 	    }
 	}
-	LOGGER.info("Universes with solutions: " + bestUniversesID.toString());
+	LOGGER.warning("Universes with solutions: " + bestUniversesID.toString());
 
 	LOGGER.fine("id" + "\t" + "maximal");
 
-	int correctlyFound = 0;
-	for (int step = 0; step < Config.RUN_TIMES; step++) {
-	    System.out.println("step: "+ step);
+	
+	
+	LOGGER.warning("gen_proc \t success \t avg.size");
+	do {
+	    int correctlyFound = 0;
+	     ArrayList<Long> pointsChecked = new ArrayList<Long>();
+	     System.out.println("pc "+procent); 
+	     
+	for (int step = 0; step < RUN_TIMES; step++) {
+	
 	    Multiverse testVerse = new Multiverse();
 	    testVerse.create(sp);
 	    int predictedBestId = 0;
 	    double predictedBestMax = 0;
-	    long checked=0;
-	    HyperSpaceSearch.initMVerse(testVerse,  Config.GENERATE_PROCENT_TRANSITION_FUNCTION,Config.GENERATE_PROCENT_OUTPUT_FUNCTION);
+	    HyperSpaceSearch.initMVerse(testVerse,
+		    procent,
+		    procent);
 	    for (int i = 0; i < testVerse.getSizeofMultiverse(); i++) {
 		bUniverse = testVerse.parallelUniverses.get(i);
 		LOGGER.finest(i + "\t" + bUniverse.getAverageMass() + "\t"
@@ -65,21 +82,32 @@ public class PredictBySampling {
 		    predictedBestId = i;
 		    predictedBestMax = bUniverse.getMaxMass();
 		}
-		checked=+bUniverse.points.size(); 
 	    }
+	    long checked = testVerse.computeActualSearchSpaceSize();
 
 	    LOGGER.fine(predictedBestId + "\t" + predictedBestMax);
-	    //System.out.println(checked);
+	    pointsChecked.add(checked);
 	    if (bestUniversesID.contains(predictedBestId)) {
 		correctlyFound++;
 	    }
-	   
-	    
+
 	}
+	double average = 0;
+	for (int i = 0; i < pointsChecked.size(); i++) {
+	    average += (double) pointsChecked.get(i)
+		    / (double) pointsChecked.size();
+	}
+
 	LOGGER.info("Correctly predicted: " + correctlyFound + " out of "
-		    + Config.RUN_TIMES + ": "
-		    + ((double)correctlyFound / (double)Config.RUN_TIMES));
+		+ RUN_TIMES + ": "
+		+ ((double) correctlyFound / (double) RUN_TIMES));
 
-
-    }
+	LOGGER.info("Average amount of points: " + average + " out of "
+		+ canonicalVerse.searchSpaceSize);
+    
+	LOGGER.warning(procent+"\t" +(double) correctlyFound / (double) RUN_TIMES+"\t "+(double)average/(double)canonicalVerse.searchSpaceSize);
+	
+	procent+=GENERATE_PROCENT_STEP;
+	} while (procent<=GENERATE_PROCENT_MAX);
+	}
 }

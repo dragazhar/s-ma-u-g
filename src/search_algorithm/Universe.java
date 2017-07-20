@@ -40,11 +40,11 @@ public class Universe {
 	this.mVerse = mVerse;
 	this.flag = flag;
 
-	this.sizeT = mVerse.mVerseCSR.sizeOfFlagSpace(flag);
+	this.sizeT = TransitionFunctionCSR.sizeOfFlagSpace(flag);
 	this.sizeO = mVerse.sizeOfOutputFunctionSpace();
 	this.sizeTO = this.sizeT * this.sizeO;
 
-	this.mask = mVerse.mVerseCSR.genAddressMask(flag);
+	this.mask = TransitionFunctionCSR.genAddressMask(flag);
 	this.universeId = universeId;
 
     }
@@ -132,7 +132,7 @@ public class Universe {
     }
 
     public void generateAllPoints() {
-	ArrayList<int[]> pointsT = mVerse.mVerseCSR.enumerateSeqByFlag(flag);
+	ArrayList<int[]> pointsT = TransitionFunctionCSR.enumerateSeqByFlag(flag);
 	ArrayList<int[]> pointsO = new ArrayList<int[]>();
 	if (mVerse.searchProblem.getM() > 0) {
 	    pointsO = OutputFunctionSR.enumerateAll(mVerse.dimensionO,
