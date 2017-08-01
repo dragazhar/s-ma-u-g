@@ -155,4 +155,8 @@ public class ModelingBehaviour extends SearchProblem {
 		aabRecognizerData);
     }
 
+    public boolean filterPointByRepresentation(Point p) {
+	return true;
+    }
+
 }

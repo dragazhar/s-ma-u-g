@@ -92,5 +92,10 @@ public class PredictEnviroment extends SearchProblem {
     public void setEnvironment(String environment) {
         this.environment = environment;
     }
+    
+    public boolean filterPointByRepresentation(Point p) {
+
+	return true;
+    }
 
 }

@@ -14,7 +14,7 @@ public class Config {
     // Multiverse controls
     public static final double GENERATE_PROCENT_TRANSITION_FUNCTION = 0.2;
     public static final double GENERATE_PROCENT_OUTPUT_FUNCTION = 0.2;
-    
+
     public static final boolean EXPLORE_ALL = true;
     public static final boolean EXIT_INIT_AT_MAX = false;
 
@@ -27,5 +27,10 @@ public class Config {
     public static final String LOG_TXT_FILENAME = "log.txt";
     public static final String LOG_HTML_FILENAME = "log.html";
     public static final boolean HTML_OUTPUT = false;
+
+    // Artificial ant
+    public static final int TIME_STEPS = 100;
+    // Filtering points on the representation level using domain knowledge
+    public static boolean FILTER_POINTS = true;
 
 }

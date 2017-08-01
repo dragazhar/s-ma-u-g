@@ -10,28 +10,27 @@ import fsm.Alphabet;
 
 public abstract class SearchProblem {
 
-
-    private String name="";
+    private String name = "";
 
     private int n = 0;
     private int k = 0;
     private int m = 0;
-    private int type=ConfigValues.MOORE_MACHINE;
-    
-    private Alphabet alpha =new Alphabet();
-    private Alphabet beta =new Alphabet();
-    
+    private int type = ConfigValues.MOORE_MACHINE;
 
+    private Alphabet alpha = new Alphabet();
+    private Alphabet beta = new Alphabet();
+
+    public abstract boolean filterPointByRepresentation(Point p);
     
     public abstract double getPointScore(Point p);
-    
+
     public abstract void printSolution(Point p) throws IOException;
 
     public SearchProblem() {
-	
+
 	super();
     }
-    
+
     public int getN() {
 	return n;
     }
@@ -57,31 +56,35 @@ public abstract class SearchProblem {
     }
 
     public Alphabet getAlpha() {
-        return alpha;
+	return alpha;
     }
 
     public void setAlpha(Alphabet alpha) {
-        this.alpha = alpha;
+	this.alpha = alpha;
     }
 
     public Alphabet getBeta() {
-        return beta;
+	return beta;
     }
 
     public void setBeta(Alphabet beta) {
-        this.beta = beta;
+	this.beta = beta;
     }
+
     public String getName() {
-        return name;
+	return name;
     }
+
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
+
     public int getType() {
-        return type;
+	return type;
     }
+
     public void setType(int type) {
-        this.type = type;
+	this.type = type;
     }
 
 }
