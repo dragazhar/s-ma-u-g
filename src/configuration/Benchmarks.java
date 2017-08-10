@@ -46,6 +46,9 @@ public class Benchmarks {
 	case ConfigValues.PREDICTOR_1111010010111101001:
 	    sp = ProblemDescriptions.predictor1111010010111101001();
 	    break;
+	case ConfigValues.ANT_SFT_5:
+	    sp = ProblemDescriptions.antSFT5();
+	    break;
 	default:
 	    sp = ProblemDescriptions.abRecognizer();
 	    break;

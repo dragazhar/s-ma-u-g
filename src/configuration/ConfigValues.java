@@ -17,6 +17,7 @@ public class ConfigValues {
     public static final int PREDICTOR_001111 = 9;
     public static final int PREDICTOR_MOHHAMED100 = 10;
     public static final int PREDICTOR_1111010010111101001 = 11;
+    public static final int ANT_SFT_5 = 12;
     // controls
     public static final int RUN_ONCE=1;
 

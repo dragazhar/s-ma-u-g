@@ -106,11 +106,10 @@ public class Universe {
 			this.bestPoint = point;
 			this.maxMass = point.getValue();
 		    }
-		    if (!points.containsKey(key)) {
+		    if ((!points.containsKey(key))) {
 			score = mVerse.searchProblem.getPointScore(point);
 			point.setValue(score);
 			points.put(key, point);
-
 			if (point.getValue() > bestPoint.getValue()) {
 			    this.bestPoint.copyPoint(point);
 			    this.maxMass = point.getValue();
@@ -132,7 +131,8 @@ public class Universe {
     }
 
     public void generateAllPoints() {
-	ArrayList<int[]> pointsT = TransitionFunctionCSR.enumerateSeqByFlag(flag);
+	ArrayList<int[]> pointsT = TransitionFunctionCSR
+		.enumerateSeqByFlag(flag);
 	ArrayList<int[]> pointsO = new ArrayList<int[]>();
 	if (mVerse.searchProblem.getM() > 0) {
 	    pointsO = OutputFunctionSR.enumerateAll(mVerse.dimensionO,
@@ -142,6 +142,7 @@ public class Universe {
 	    int[] coordO = generateRNDCoordinatesO();
 	    pointsO.add(coordO);
 	}
+	boolean first = true;
 	for (int[] pT : pointsT) {
 
 	    for (int[] pO : pointsO) {
@@ -153,20 +154,23 @@ public class Universe {
 		point.setKey(key);
 		double score = mVerse.searchProblem.getPointScore(point);
 		point.setValue(score);
-		if (points.size() == 0) {
+		if (points.size() == 0 && first) {
 		    this.bestPoint = point;
 		    this.maxMass = score;
+		    first = false;
 		}
-		if (!points.containsKey(key)) {
+		if (!points.containsKey(key) && Config.HASHING) {
 		    points.put(key, point);
-		    if (point.getValue() > bestPoint.getValue()) {
-			 this.bestPoint.copyPoint(point);
-			this.maxMass = point.getValue();
-		    }
 		    averageMassSumm += point.getValue();
 		}
+		if (point.getValue() > bestPoint.getValue()) {
+		    this.bestPoint.copyPoint(point);
+		    this.maxMass = point.getValue();
+		}
+
 		if (score == 1.0) {
 		    mVerse.solution = point;
+		    return;
 		}
 
 	    }
@@ -223,7 +227,7 @@ public class Universe {
 	if (points.isEmpty()) {
 	    return 0.0;
 	} else
-	    return (double)this.averageMassSumm /(double) points.size();
+	    return (double) this.averageMassSumm / (double) points.size();
     }
 
     public boolean isExplored() {
@@ -260,9 +264,9 @@ public class Universe {
 	String s = "Universe: ";
 	s += mVerse.mVerseCSR.flagtoString(flag);
 	s += "\t";
-//	s += "Average mass: ";
-//	s += this.getAverageMass();
-//	s += " \t";
+	// s += "Average mass: ";
+	// s += this.getAverageMass();
+	// s += " \t";
 	s += "Max mass: ";
 	s += this.getMaxMass();
 	s += " \t";

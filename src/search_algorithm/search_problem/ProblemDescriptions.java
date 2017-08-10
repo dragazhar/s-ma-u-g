@@ -84,6 +84,10 @@ public class ProblemDescriptions {
        SearchProblem sp =new PredictEnviroment(5," 1"," Mohhamed100");
        return sp;
    }
+   public static SearchProblem antSFT5() throws IOException{
+       SearchProblem sp =new TrackTheTrail(5, "trainingData\\SantaFeTrail.txt","antSF");
+       return sp;
+   }
    
   
    

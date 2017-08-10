@@ -19,17 +19,18 @@ public class Config {
     public static final boolean EXIT_INIT_AT_MAX = false;
 
     // Task
-    public static final int BENCHMARK = ConfigValues.PREDICTOR_001111;
-    public static final int RUN_TIMES = ConfigValues.RUN_ONCE;
+    public static final int BENCHMARK = ConfigValues.ANT_SFT_5;
+    public static final int RUN_TIMES =100;//ConfigValues.RUN_ONCE;
+    public static final boolean HASHING = false;
 
     // Logger
-    public static final Level LOG_LEVEL = Level.WARNING;
+    public static final Level LOG_LEVEL = Level.INFO;
     public static final String LOG_TXT_FILENAME = "log.txt";
     public static final String LOG_HTML_FILENAME = "log.html";
     public static final boolean HTML_OUTPUT = false;
 
     // Artificial ant
-    public static final int TIME_STEPS = 100;
+    public static final int TIME_STEPS = 400;
     // Filtering points on the representation level using domain knowledge
     public static boolean FILTER_POINTS = true;
 
