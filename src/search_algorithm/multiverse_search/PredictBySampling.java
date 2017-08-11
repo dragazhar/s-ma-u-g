@@ -17,9 +17,9 @@ public class PredictBySampling {
 	    .getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static final int RUN_TIMES = 1000;
-    public static final double GENERATE_PROCENT_MIN = 0.002f;
-    public static final double GENERATE_PROCENT_MAX = 0.002f;
-    public static final double GENERATE_PROCENT_STEP = 0.1f;
+    public static final double GENERATE_PROCENT_MIN = 0.0005f;
+    public static final double GENERATE_PROCENT_MAX = 0.001f;
+    public static final double GENERATE_PROCENT_STEP = 0.0001f;
     public static final boolean GENERATE_INDEPENDENTLY = true;
     public static final boolean RUN_TEST = true;
     public static final int FROM = 1;
